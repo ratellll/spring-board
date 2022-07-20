@@ -97,28 +97,24 @@ public class BoardController {
 		return callbackMsg;
 	}
 	
-	@RequestMapping(value = "/board/boardUpdate.do", method = RequestMethod.GET)
-	public String boardUpdate(Locale locale, Model model) throws Exception{
-		
-		
+	@RequestMapping(value =  "/board/boardUpdate.do", method = RequestMethod.GET)
+	public String boardUpdate(Locale locale,BoardVo boardVo) {
+
 		return "board/boardUpdate";
 	}
-
-	@RequestMapping(value = "/board/boardUpdateAction.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/board/boardUpdateAction.do", method = RequestMethod.POST)
 	@ResponseBody
-	public String boardUpdateAction(Locale locale,BoardVo boardVo) throws Exception{
-		
+	public String boardUpdateAction(Locale locale, BoardVo boardVo) throws Exception{
 		HashMap<String, String> result = new HashMap<String, String>();
 		CommonUtil commonUtil = new CommonUtil();
 		
-		int resultCnt = boardService.boardInsert(boardVo);
+		int resultUpCnt = boardService.boardUpdate(boardVo);
 		
-		result.put("success", (resultCnt > 0)?"Y":"N");
+		result.put("success", (resultUpCnt > 0)?"Y":"N");
 		String callbackMsg = commonUtil.getJsonCallBackString(" ",result);
 		
 		System.out.println("callbackMsg::"+callbackMsg);
 		
 		return callbackMsg;
 	}
-	
 }

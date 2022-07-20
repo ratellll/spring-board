@@ -50,12 +50,17 @@ public class BoardDaoImpl implements BoardDao{
 		// TODO Auto-generated method stub
 		return sqlSession.insert("board.boardInsert", boardVo);
 	}
-	
 	@Override
-	public void boardUpdate(BoardVo boardVo) throws Exception{
+	public int boardUpdate(BoardVo boardVo) throws Exception {
 		// TODO Auto-generated method stub
-		return sqlSession.update("board.boardUpdate", boardVo)
+		return sqlSession.update("board.boardUpdate", boardVo);
 	}
-	
+	@Override
+	public void boardDelete(int boardNum) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.delete("board.boardDelete");
+				
+		
+	}
 	
 }
