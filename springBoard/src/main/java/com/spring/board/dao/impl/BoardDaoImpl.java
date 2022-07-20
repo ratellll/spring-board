@@ -55,7 +55,6 @@ public class BoardDaoImpl implements BoardDao{
 		// TODO Auto-generated method stub
 		return sqlSession.update("board.boardUpdate", boardVo);
 	}
-	@Override
 	public void boardDelete(int boardNum) throws Exception {
 		// TODO Auto-generated method stub
 		return sqlSession.delete("board.boardDelete");
