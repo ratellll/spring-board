@@ -75,14 +75,24 @@
         ,TO_CHAR(SYSDATE)
         )
     </select>
-	<update id ="boardUpdate" parameterType="com.spring.board.vo.BoardVo">
-		UPDATE
+    
+    <select id="boardUpdateView" parameterType="com.spring.board.vo.BoardVo" resultMap="boardVo">
+    SELECT
+        	BOARD_TYPE
+			,BOARD_NUM
+			,BOARD_TITLE
+			,BOARD_COMMENT
+		FROM
 			BOARD
-		SET
-			BOARD_TITLE =#{boardTitle}
-			,BOARD_COMMENT=#{boardComment}
-		WHERE
-			BOARD_NUM = #{boardNum}
+    	WHERE 	BOARD_TYPE = #{boardType}
+    	AND 	BOARD_NUM  = #{boardNum}
+    </select>
+	<update id ="boardUpdateAct" parameterType="com.spring.board.vo.BoardVo">
+		UPDATE BOARD
+			SET BOARD_TITLE = #{boardTitle}
+			   ,BOARD_COMMENT = #{boardComment}
+			WHERE BOARD_NUM = #{boardNum}
+				
 	</update>
 	<delete id = "boardDelete" parameterType="com.spring.board.vo.BoardVo">
 		 delete 

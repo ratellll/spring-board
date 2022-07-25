@@ -13,12 +13,14 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.spring.board.HomeController;
 import com.spring.board.service.boardService;
@@ -92,26 +94,42 @@ public class BoardController {
 		result.put("success", (resultCnt > 0)?"Y":"N");
 		String callbackMsg = commonUtil.getJsonCallBackString(" ",result);
 		
+		
 		System.out.println("callbackMsg::"+callbackMsg);
 		
 		return callbackMsg;
 	}
 	
-	@RequestMapping(value =  "/board/boardUpdate.do", method = RequestMethod.GET)
-	public String boardUpdate(Locale locale,BoardVo boardVo) {
+	
+	@RequestMapping(value =  "/board/{boardType}/{boardNum}/boardUpdate.do" , method = RequestMethod.GET)
+	public String boardUpdateView(Locale locale, Model model
+			,@PathVariable("boardType")String boardType
+			,@PathVariable("boardNum")int boardNum) throws Exception {
+			BoardVo boardVo = new BoardVo();
+		
+		    boardVo = boardService.selectBoard(boardType,boardNum);
+			model.addAttribute("boardType", boardType);
+			model.addAttribute("boardNum", boardNum);
+			model.addAttribute("boardUpdateView",boardVo);
+		
 
 		return "board/boardUpdate";
 	}
-	@RequestMapping(value = "/board/boardUpdateAction.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/board/boardUpdateAct.do", method = RequestMethod.PUT)
 	@ResponseBody
-	public String boardUpdateAction(Locale locale, BoardVo boardVo) throws Exception{
+	public String boardUpdateAct(BoardVo boardVo, RedirectAttributes rttr
+			,@PathVariable("boardTitle")String boardTitle
+			,@PathVariable("boardComment")String boardComment
+			,@PathVariable("boardNum")String boardNum) throws Exception{
+		
 		HashMap<String, String> result = new HashMap<String, String>();
 		CommonUtil commonUtil = new CommonUtil();
 		
-		int resultUpCnt = boardService.boardUpdate(boardVo);
+		int resultCnt = boardService.boardUpdateAct(boardVo);
 		
-		result.put("success", (resultUpCnt > 0)?"Y":"N");
+		result.put("success", (resultCnt > 0)?"Y":"N");
 		String callbackMsg = commonUtil.getJsonCallBackString(" ",result);
+		
 		
 		System.out.println("callbackMsg::"+callbackMsg);
 		

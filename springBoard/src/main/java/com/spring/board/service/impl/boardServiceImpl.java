@@ -54,14 +54,17 @@ public class boardServiceImpl implements boardService{
 	
 	}
 	@Override
-	public int boardUpdate(BoardVo boardVo) throws Exception {
-		return boardDao.boardUpdate(boardVo);
+	public int boardUpdateAct(BoardVo boardVo) throws Exception {
+		return boardDao.boardUpdateAct(boardVo);
+		
 	}
 
-	@Override
-	public int boardDelete(int boardNum) throws Exception {
-		// TODO Auto-generated method stub
-		boardDao.boardDelete(boardNum);
-		return boardNum;
-	}
+//	@Override
+//	public int boardDelete(int boardNum) throws Exception {
+//		// TODO Auto-generated method stub
+//		boardDao.boardDelete(boardNum);
+//		return boardNum;
+//	}
+//
+
 }

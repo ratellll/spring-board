@@ -11,13 +11,13 @@
 $j(document).ready(function(){
 	
 	$j("#submit").on("click",function(){
-		var $frm = $j('.boardUpdate :input');
+		var $frm = $j('.boardUpdateAct :input');
 		var param = $frm.serialize();
 		
 		$j.ajax({
-		    url : "/board/boardUpdateAction.do",
+		    url : "/board/boardUpdateAct.do",
 		    dataType: "json",
-		    type: "POST",
+		    type: "PUT",
 		    data : param,
 		    success: function(data, textStatus, jqXHR)
 		    {
@@ -35,14 +35,15 @@ $j(document).ready(function(){
 	});
 });
 
+
 </script>
 <body>
-<form class="boardUpdate" method="post">
+<form id="boardUpdate" action="/board/boardUpdate.do" method="post">
 	<table align="center">
 		<tr>
-			<td align="right">
+		<td align="right">
 			<input id="submit" type="button" value="¼öÁ¤">
-			</td>
+  </td>
 		</tr>
 		<tr>
 			<td>
@@ -52,7 +53,7 @@ $j(document).ready(function(){
 						Title
 						</td>
 						<td width="400">
-						<input name="boardTitle" type="text" size="50" value="${board.boardTitle}"> 
+						<input name="boardTitle" type="text" size="50" value="${boardUpdateView.boardTitle}"> 				
 						</td>
 					</tr>
 					<tr>
@@ -60,7 +61,7 @@ $j(document).ready(function(){
 						Comment
 						</td>
 						<td valign="top">
-						<input name="boardComment" type="text" size="50" value ="${board.boardComment}">
+						<input name="boardComment" type="text" size="50"value="${boardUpdateView.boardComment}">
 						</td>
 					</tr>
 					<tr>

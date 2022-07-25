@@ -40,7 +40,8 @@
 	</tr>
 	<tr>
 		<td align="right">
-			<a href = "/board/${list.boardType}/${list.boardNum}/boardUpdate.do?pageNo=${pageNo}">update</a>
+		
+			<a href ="/board/${board.boardType}/${board.boardNum}/boardUpdate.do?${pageNo}">¼öÁ¤</a>
 			<a href="/board/boardList.do">List</a>
 		</td>
 	</tr>
