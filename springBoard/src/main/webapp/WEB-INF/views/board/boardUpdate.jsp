@@ -8,15 +8,39 @@
 <title>boardUpdate</title>
 </head>
 <script type="text/javascript">
+$j(document).ready(function(){
 	
+	$j("#submit").on("click",function(){
+		var $frm = $j('.boardUpdate :input');
+		var param = $frm.serialize();
+		
+		$j.ajax({
+		    url : "/board/boardUpdateAction.do",
+		    dataType: "json",
+		    type: "POST",
+		    data : param,
+		    success: function(data, textStatus, jqXHR)
+		    {
+				alert("작성완료");
+				
+				alert("메세지:"+data.success);
+				
+				location.href = "/board/boardList.do";
+		    },
+		    error: function (jqXHR, textStatus, errorThrown)
+		    {
+		    	alert("실패");
+		    }
+		});
+	});
+});
 </script>
 <body>
-	<form name="update" method="POST" action="${path}/board/boardUpdate?${board.boardNum}">
-	
+	<form name="update" method="POST"
+		action="${path}/board/boardUpdate?${board.boardNum}">
 		<table align="center">
 			<tr>
-				<td align="right"><input id="submit" type="button" value="수정">
-				</td>
+				<td align="right"></td>
 			</tr>
 			<tr>
 				<td>
@@ -39,7 +63,9 @@
 				</td>
 			</tr>
 			<tr>
-				<td align="right"><a href="/board/boardList.do">List</a></td>
+				<td align="right">
+				<input id="submit" type="button" value="수정">
+					<a href="/board/boardList.do">List</a></td>
 			</tr>
 		</table>
 	</form>
