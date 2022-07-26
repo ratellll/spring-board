@@ -19,8 +19,8 @@ public interface BoardDao {
 	
 	public BoardVo boardUpdateView(int boardNum) throws Exception;
 	
-	public int boardUpdateAct(BoardVo boardVo) throws Exception;
-	
+	public int boardUpdate(BoardVo boardVo) throws Exception;
+
 	//public void boardDelete(int boardNum) throws Exception;
 	
 }

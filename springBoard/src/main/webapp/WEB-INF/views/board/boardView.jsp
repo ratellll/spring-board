@@ -7,6 +7,10 @@
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>boardView</title>
 </head>
+<script type="text/javascript">
+
+
+</script>
 <body>
 <table align="center">
 	<tr>
@@ -40,11 +44,12 @@
 	</tr>
 	<tr>
 		<td align="right">
-		
-			<a href ="/board/${board.boardType}/${board.boardNum}/boardUpdate.do?${pageNo}">수정</a>
+
+			<a href = "/board/${boardType}/${boardNum}/boardUpdate.do?pageNo=${pageNo}">수정</a>
 			<a href="/board/boardList.do">List</a>
+	
 		</td>
 	</tr>
-</table>	
+</table>
 </body>
 </html>

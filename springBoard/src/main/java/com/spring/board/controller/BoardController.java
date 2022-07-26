@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import org.codehaus.jackson.JsonProcessingException;
 import org.codehaus.jackson.map.ObjectMapper;
@@ -101,38 +102,27 @@ public class BoardController {
 	}
 	
 	
-	@RequestMapping(value =  "/board/{boardType}/{boardNum}/boardUpdate.do" , method = RequestMethod.GET)
-	public String boardUpdateView(Locale locale, Model model
-			,@PathVariable("boardType")String boardType
-			,@PathVariable("boardNum")int boardNum) throws Exception {
-			BoardVo boardVo = new BoardVo();
+	@RequestMapping(value = "/board/{boardType}/{boardNum}/boardUpdate.do", method = RequestMethod.GET)
+	public String boardUpdate(Locale locale, Model model
+			 ,@PathVariable("boardType")String boardType
+			 ,@PathVariable("boardNum")int boardNum) throws Exception {
+		BoardVo boardVo = new BoardVo();
 		
-		    boardVo = boardService.selectBoard(boardType,boardNum);
-			model.addAttribute("boardType", boardType);
-			model.addAttribute("boardNum", boardNum);
-			model.addAttribute("boardUpdateView",boardVo);
+		boardVo = boardService.selectBoard(boardType,boardNum);
 		
-
+		model.addAttribute("boardType", boardType);
+		model.addAttribute("boardNum", boardNum);
+		model.addAttribute("board", boardVo);
+		
 		return "board/boardUpdate";
+		
 	}
-	@RequestMapping(value = "/board/boardUpdateAct.do", method = RequestMethod.PUT)
-	@ResponseBody
-	public String boardUpdateAct(BoardVo boardVo, RedirectAttributes rttr
-			,@PathVariable("boardTitle")String boardTitle
-			,@PathVariable("boardComment")String boardComment
-			,@PathVariable("boardNum")String boardNum) throws Exception{
+	
+	@RequestMapping(value="/board/boardUpdateAction.do" , method = RequestMethod.POST)
+	public String boardUpdateAction(BoardVo boardVo,  Locale locale) throws Exception{
 		
-		HashMap<String, String> result = new HashMap<String, String>();
-		CommonUtil commonUtil = new CommonUtil();
-		
-		int resultCnt = boardService.boardUpdateAct(boardVo);
-		
-		result.put("success", (resultCnt > 0)?"Y":"N");
-		String callbackMsg = commonUtil.getJsonCallBackString(" ",result);
-		
-		
-		System.out.println("callbackMsg::"+callbackMsg);
-		
-		return callbackMsg;
+			boardService.boardUpdate(boardVo);
+			
+			return "board/boardUpdateAction";
 	}
-}
+	}
