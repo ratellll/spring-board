@@ -61,12 +61,11 @@ public class boardServiceImpl implements boardService{
 		
 	}
 
-//	@Override
-//	public int boardDelete(int boardNum) throws Exception {
-//		// TODO Auto-generated method stub
-//		boardDao.boardDelete(boardNum);
-//		return boardNum;
-//	}
-//
+	@Override
+	public void boardDelete(BoardVo boardVo) throws Exception {
+		// TODO Auto-generated method stub
+		boardDao.boardDelete(boardVo);
+	}
+
 
 }

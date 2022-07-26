@@ -46,6 +46,7 @@
 		<td align="right">
 
 			<a href = "/board/${boardType}/${boardNum}/boardUpdate.do?pageNo=${pageNo}">수정</a>
+			<a href = "/board/${boardNum}/boardDelete.do">삭제</a>
 			<a href="/board/boardList.do">List</a>
 	
 		</td>

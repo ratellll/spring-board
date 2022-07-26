@@ -119,10 +119,28 @@ public class BoardController {
 	}
 	
 	@RequestMapping(value="/board/boardUpdateAction.do" , method = RequestMethod.POST)
+	@ResponseBody
 	public String boardUpdateAction(BoardVo boardVo,  Locale locale) throws Exception{
 		
 			boardService.boardUpdate(boardVo);
+			HashMap<String, String> result = new HashMap<String, String>();
+
+			CommonUtil commonUtil = new CommonUtil();
 			
-			return "board/boardUpdateAction";
+			int resultCnt = boardService.boardUpdate(boardVo);
+			
+			result.put("success", (resultCnt > 0)?"Y":"N");
+			String callbackMsg = commonUtil.getJsonCallBackString(" ",result);
+			
+			
+			System.out.println("callbackMsg::"+callbackMsg);
+			
+			return callbackMsg;
+	}
+	
+	@RequestMapping(value="board/{boardNum}/boardDelete.do", method = RequestMethod.GET)
+	public String boardDelete(BoardVo boardVo) throws Exception {
+		boardService.boardDelete(boardVo);
+		return "redirect:/board/boardList.do";
 	}
 	}

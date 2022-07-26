@@ -21,39 +21,41 @@ $j(document).ready(function(){
 		    data : param,
 		    success: function(data, textStatus, jqXHR)
 		    {
-				alert("ìž‘ì„±ì™„ë£Œ");
+				alert("¼öÁ¤¿Ï·á");
 				
-				alert("ë©”ì„¸ì§€:"+data.success);
+				alert("¸Þ¼¼Áö:"+data.success);
 				
 				location.href = "/board/boardList.do";
 		    },
 		    error: function (jqXHR, textStatus, errorThrown)
 		    {
-		    	alert("ì‹¤íŒ¨");
+		    	alert("½ÇÆÐ");
 		    }
 		});
 	});
 });
 </script>
 <body>
-	<form name="update" method="POST"
-		action="${path}/board/boardUpdate?${board.boardNum}">
+	<form class="boardUpdate">
 		<table align="center">
 			<tr>
-				<td align="right"></td>
+				<td align="right">		
+				<input id="submit" type="button" value="¼öÁ¤">
+				</td>
 			</tr>
 			<tr>
 				<td>
 					<table border="1">
 						<tr>
 							<td width="120" align="center">Title</td>
-							<td width="400"><input type="text" name="boardTitle"
-								value="${board.boardTitle}"></td>
+							<td width="400">
+			  				<input type="hidden" name="boardNum" value="${board.boardNum}">
+							<input type="text" name="boardTitle" value="${board.boardTitle}">
+							</td>
 						</tr>
 						<tr>
 							<td height="300" align="center">Comment</td>
-							<td><input type="text" name="boardComment"
-								value="${board.boardComment}"></td>
+							<td><input type="text" name="boardComment" value="${board.boardComment}"></td>
 						</tr>
 						<tr>
 							<td align="center">Writer</td>
@@ -64,7 +66,6 @@ $j(document).ready(function(){
 			</tr>
 			<tr>
 				<td align="right">
-				<input id="submit" type="button" value="ìˆ˜ì •">
 					<a href="/board/boardList.do">List</a></td>
 			</tr>
 		</table>

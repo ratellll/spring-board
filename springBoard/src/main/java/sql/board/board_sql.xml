@@ -95,9 +95,9 @@
 				
 	</update>
 	<delete id = "boardDelete" parameterType="com.spring.board.vo.BoardVo">
-		 delete 
-		 from BOARD 
-		 WHERE BOARD_NUM= #{boardNum}
+		DELETE
+		 FROM BOARD 
+		 WHERE BOARD_NUM = #{boardNum}
 	
 	</delete>
 </mapper>
